@@ -8,59 +8,73 @@ import java.util.Scanner;
 import java.lang.Math;
 
 public class Calculator {
-
+//public class of Calculator
     public static final Logger logger = LogManager.getLogger(Calculator.class);
 
     public Calculator() {}
 
     public static void main(String[] args) {
+        
         Calculator cal = new Calculator();
         Scanner scanner = new Scanner(System.in);
-        double num1, num2;
-
-        do{
-            System.out.println("Calcuator");
-            System.out.println("Available functions\n1 - Square Root of x\n2 - Factorial of x\n3 - Natural Log of x\n4 - x Power b\nAny other number to exit");
-            int fun;
+        double number1, number2;
+        //declaring variables of number1 and number2
+        do{ //following features of calculator are available
+            
+            System.out.println("Calcuator");    
+            //prints calculator
+            
+            System.out.println("Available functions are \n1 - The Square Root of first number\n2 - The Factorial of first number\n3 - The Natural Log of first number\n4 - There first number Power second number\nAny other number to EXIT");
+            // prints Available functions like Square Root of , Factorial of first number, Natural Log of first number, first number Power second number
+           
+            int Function;
 
             try{
-                fun = scanner.nextInt();
+                Function = scanner.nextInt();
             } catch (InputMismatchException error) {
                 return;
             }
 
-            if (fun < 1 || fun > 4){
+            if (Function < 1 || Function > 4){  
+                //Function less than 1 and Function more than 4
                 return;
             }
 
             try{
-                System.out.println("Enter x");
-                num1 = scanner.nextDouble();
+                System.out.println("Enter first number");
+                //enter any number (first number)
+                number1 = scanner.nextDouble();
             } catch (InputMismatchException error) {
                 return;
             }
 
-            switch(fun){
+            switch(Function){
                 case 1:
-                    System.out.println("Square root of x = " + cal.sqt(num1));
+                    System.out.println("The Square root of first number = " + cal.sqt(number1));
+                    //prints sqaure root of first number
                     break;
                 case 2:
-                    System.out.println("Factorial of x =" + cal.factorial(num1));
+                    System.out.println("The Factorial of first number =" + cal.factorial(number1));
+                    //prints factorial of first number
                     break;
                 case 3:
-                    System.out.println("Natural log of x =" + cal.log(num1));
+                    System.out.println("The Natural log of first number =" + cal.log(number1));
+                    //prints natural log of first number
                     break;
                 case 4:
                     try {
-                        System.out.print("Enter b");
-                        num2 = scanner.nextDouble();
+                        System.out.print("Enter second number");
+                        //enter any other number (second number)
+                        number2 = scanner.nextDouble();
                     } catch (InputMismatchException error){
                         return;
                     }
-                    System.out.println("x power b = " + cal.power(num1, num2));
+                    System.out.println("The first number power second number = " + cal.power(number1, number2));
+                    //prints first number power second number
                     break;
                 default:
-                    System.out.print("Closing");
+                    System.out.print("CLOSING");
+                    //prints closing
                     return;
             }
         }while(true);
@@ -73,12 +87,13 @@ public class Calculator {
             logger.info("[SQRT] - " + i);
             if (i < 0) {
                 temp = Double.NaN;
-                throw new ArithmeticException("Cannot find square root of -ve numbers");
+                throw new ArithmeticException("CAN'T FIND SQUARE ROOT OF NEGATIVE NUMBERS");
             } else {
                 temp = Math.sqrt(i);
             }
         } catch (ArithmeticException error){
-            logger.error("[EXCEPTION - SQRT] - Cannot find sqrt of -ve numbers");
+            logger.error("[EXCEPTION - SQRT] - CAN'T FIND SQUARE ROOT OF NEGATIVE NUMBERS");
+            //Cannot find sqrt of negative numbers
         } finally {
             logger.info("[RESULT - SQRT] = " + temp);
         }
@@ -92,6 +107,7 @@ public class Calculator {
             temp *= t;
         }
         logger.info("[RESULT - FACTORIAL] = " + temp);
+        //result - factorial
         return temp;
     }
     public static double log(double i){
@@ -100,17 +116,20 @@ public class Calculator {
             logger.info("[LOG] - " + i);
             if (i < 0){
                 temp = Double.NaN;
-                throw new ArithmeticException("Cannot find log of negative numbers");
+                throw new ArithmeticException("CAN'T FIND LOG OF NEGATIVE NUMBER");
+                //Cannot find log of negative numbers
             }
             else if (i == 0){
                 temp = Double.NEGATIVE_INFINITY;
-                throw new ArithmeticException("Log of 0 is negative infinity");
+                throw new ArithmeticException("LOG OF 0 IS NEGATIVE INFINITY");
+                //Log of 0 is negative infinity
             }
             else {
                 temp = Math.log(i);
             }
         } catch (ArithmeticException error){
-            logger.error("[EXCEPTION - log] - inout is less than or equal to zero");
+            logger.error("[EXCEPTION - LOG] - INPUT IS LESS THAN OR EQUAL TO ZERO");
+            //input is less than or equal to zero
         } finally {
             logger.info("[RESULT - LOG] = " + temp);
         }
@@ -119,6 +138,7 @@ public class Calculator {
     public static double power(double i, double j){
         logger.info("[POWER] - " + i + ", " + j );
         double temp = Math.pow(i,j);
+        //exponential function - power function
         logger.info("[RESULT - POWER] = " + temp);
         return temp;
     }
